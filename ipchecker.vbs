@@ -15,7 +15,7 @@ newIP=0
 on error resume next 'skip errors
 
 set xmlhttp = CreateObject("MSXML2.ServerXMLHTTP")
-
+	do while true
 		xmlhttp.Open "GET", IPCheckerURL, False
 		xmlhttp.Send
 		status = xmlhttp.status
@@ -46,6 +46,15 @@ set xmlhttp = CreateObject("MSXML2.ServerXMLHTTP")
 		
 		SendMail 'send an email
 
+		'run the script every x milliseconds
+		'WScript.Sleep 3600000 'every 1 hour
+		'WScript.Sleep 7200000 'every 2 hour
+		WScript.Sleep 14400000 'every 4 hours
+		'WScript.Sleep 21600000 'every 6 hours
+		'WScript.Sleep 28800000 'every 8 hours
+		'WScript.Sleep 36000000 'every 10 hours
+		'WScript.Sleep 43200000 'every 12 hours
+	loop
 set xmlhttp = nothing
 
 Sub ReadIPFile
@@ -83,10 +92,10 @@ Sub ResetModem
 End Sub
 
 'This does not work
-Sub ResetRouter
-	xmlhttp.Open "GET", "http://192.168.0.1/Management.asp?Reboot", False, "xxxx", "xxxx"
-	xmlhttp.Send
-End Sub
+'Sub ResetRouter
+'	xmlhttp.Open "GET", "http://192.168.0.1/Management.asp?Reboot", False, "xxxx", "xxxx"
+'	xmlhttp.Send
+'End Sub
 
 Sub SendMail
 	EmailFrom = "noreply@gmail.com"
